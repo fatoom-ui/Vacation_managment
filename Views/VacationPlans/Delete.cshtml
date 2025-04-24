@@ -1,0 +1,38 @@
+﻿@model VacationManagement.Models.RequestVacation
+
+@{
+    ViewData["Title"] = "Delete Vacation Request";
+}
+
+<h1>Delete Vacation Request</h1>
+<h3 class="alert alert-danger">Are you sure you want to delete this request?</h3>
+
+<div>
+    <h4>Request Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Employee Name</dt>
+        <dd class="col-sm-9">@Model.Employee.Name</dd>
+
+        <dt class="col-sm-3">Vacation Type</dt>
+        <dd class="col-sm-9">@Model.VacationType.VacationName</dd>
+
+        <dt class="col-sm-3">Request Date</dt>
+        <dd class="col-sm-9">@Model.RequestDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">Start Date</dt>
+        <dd class="col-sm-9">@Model.StartDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">End Date</dt>
+        <dd class="col-sm-9">@Model.EndDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">Comment</dt>
+        <dd class="col-sm-9">@Model.Comment</dd>
+    </dl>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<VacationManagement.Models.VacationType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>VacationTypes</h4>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.Id) *@
+            @* </th> *@
+            
+            <th>
+                @Html.DisplayNameFor(model => model.VacationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.backgroundColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberDays)
+            </th>
+            <th>Events</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @* <td> *@
+            @*     @Html.DisplayFor(modelItem => item.Id) *@
+            @*  </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.VacationName)
+            </td>
+            <td style="color:#ffff; background-color:@item.backgroundColor">
+                @Html.DisplayFor(modelItem => item.backgroundColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberDays)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

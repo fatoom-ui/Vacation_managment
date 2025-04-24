@@ -1,0 +1,100 @@
+﻿@model VacationManagement.Models.VacationPlan
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>VacationPlan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewBag.ErrorVacation == true)
+            {
+                <div class="w-100">
+                    <h4 class="alert alert-danger">The Holiday is on the Same Dates</h4>
+                </div>
+
+                <br />
+            }
+                            @* <select asp-for="RequestVacation.EmployeeId" class="form-control" id="ddlEmployees" asp-items="@(new SelectList(ViewBag.Employees,"Id","Name"))"> *@
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Find Employee</span>
+                <input type="text" class="form-control" placeholder="Enter Name Employee" id="employeeName" name="employeeName">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="" onclick="FindEmployee()">Search</button>
+                </div>
+                <select asp-for="RequestVacation.EmployeeId" class="form-control" 
+                asp-items="ViewBag.Employees">
+                @* id="ddlEmployees"> *@
+                    <option value="">--------------- Search Employee --------------</option>
+                </select>
+            </div>
+            <span asp-validation-for="RequestVacation.EmployeeId" class="text-danger"></span>
+            <div class="form-group row">
+                <div class="form-group col-md-6">
+                    <label asp-for="RequestVacation.StartDate" class="control-label"></label>
+                    <input asp-for="RequestVacation.StartDate" class="form-control" type="date" />
+                    <span asp-validation-for="RequestVacation.StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="RequestVacation.EndDate" class="control-label"></label>
+                    <input asp-for="RequestVacation.EndDate" class="form-control" type="date" />
+                    <span asp-validation-for="RequestVacation.EndDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row mt-3">
+                <h4>Include Days</h4>
+
+                <div class="form-group">
+                    @{
+                        DayOfWeek day;
+                        for (int i = 0; i < 7; i++)
+                        {
+                            day = (DayOfWeek)i;
+                            <label class="form-check-label m-4 ">
+                                <input type="checkbox" checked="checked" class="form-check-input border-primary"
+                                       name="DayOfWeekCheckbox" value="@i">
+                                @day.ToString()
+                            </label>
+
+                        }
+                    }
+                </div>
+
+            </div>
+                            @* <select asp-for="RequestVacation.VacationtypeId" class="form-control" id="ddlVacationType" asp-items="@(new SelectList(ViewBag.VacationTypes,"Id","VacationName"))"> *@
+
+
+            <div class="form-group w-50">
+                <label asp-for="RequestVacation.VacationtypeId" class="control-label" ></label>
+                <select asp-for="RequestVacation.VacationtypeId" class="form-control" 
+                asp-items="ViewBag.VacationTypes">
+                    @* id="ddlVacationType"> *@
+                @* <option value=""></option> *@
+                   
+                </select>
+                <span asp-validation-for="RequestVacation.VacationtypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestVacation.Comment" class="control-label"></label>
+                <textarea asp-for="RequestVacation.Comment" class="form-control"></textarea>
+                <span asp-validation-for="RequestVacation.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>|
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+ @* id="ddlVacationType" *@
+<script src="/Module/VacationPlane.js"></script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
